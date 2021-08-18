@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <h1>Employees</h1>
+        <ul>
+            {% for i in Employee.all %}
+            <li>{{ i.id }} - {{ i.Employee_name }} - {{i.Employee_department}}
+            
+            {% endfor %}
+        </ul>
+
+        <h1 class ="text-center">Employees</h1><br><br>
+        <div class ="container">
+            <table class="table border border-black">
+                <tr>
+                    <th scope ="col-4"> Employee Name</th>
+                    <th scope="col-4>">Employee Department</th>
+                    <th scope="col-4">Employee ID</th>
+                    <th scope="col-4">Action</th>
+                </tr>
+                {% for x in Employee.all %}
+                <tr>
+                    <th scope="row">{{ x.Employee_name }}</th>
+                    <th>{{ x.Employee_department }}</th>
+                    <th>{{ x.id }}</th>
+                    <th><a href="{% url 'delinfo' x.id %}">Delete</a></th>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+
+        <form action="{% url 'postinfo' %}" method="post">
+            {% csrf_token %}
+            <label for="employee_name">Employee Name</label>
+            <input type="text" class="form-control" id="employee_name" name="employee_name">
+            <button id="save" class="btn btn-primary span2" type="submit"> Save Changes</button>
+        </form>
+        
+    </body>
+</html>
